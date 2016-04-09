@@ -21,10 +21,10 @@ class MuseServer(ServerThread):
         print "%s %f %f %f %f" % (path, l_ear, l_forehead, r_forehead, r_ear)
 
     #receive blink data
-    @make_method('/muse/elements/blink','fff')
+    @make_method('/muse/elements/blink','r')
     def blink_callback(self, path, args):
         blink_val = args
-	print "%s %f" % (path, blink_val)
+	print "%s %r" % (path, blink_val)
 
     #handle unexpected messages
     @make_method(None, None)
