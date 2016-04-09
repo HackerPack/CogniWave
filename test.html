@@ -1,0 +1,53 @@
+<html>
+<body>
+	<div id="abc">
+
+	</div>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script> 
+    <script src = "js/fire_base_constants.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQf4f8pMlnmHj__IkX_fKLcjRL5VtGMTE&signed_in=true&libraries=geometry&sensor=false"
+        async defer></script>
+    <script src="js/login.js"></script>
+	<script src="js/match-walks.js"></script>
+	<script src="js/dbAPI.js" ></script>
+	<script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
+<script src = "js/fire_base_constants.js"></script>
+<script src = "js/dbAPI.js"></script>
+<script src="js/login.js"></script>
+<script>
+	checkSession();
+</script>
+	<script src="js/match-walks.js"></script>
+
+	<script>
+		/*var walks = [
+			{"FirstName" : "shivani",
+    			"Source" : {
+        "Latitude" : "35",
+        "Longitude" : "35"
+    },
+    "Destination" : {
+        "Latitude" : "40",
+        "Longitude" : "40"
+    },
+    "ArrivingTime" : "2:45PM",
+    "Date" : "12/11/2015T23:56:07"},
+    {"FirstName" : "Jack",
+    "Source" : {
+        "Latitude" : "35",
+        "Longitude" : "35"
+    },
+    "Destination" : {
+        "Latitude" : "40",
+        "Longitude" : "40"
+    },
+    "ArrivingTime" : "2:45PM",
+    "Date" : "12/11/2015 23:56:07"}];*/
+    getAllEvents(function(walks){
+        console.log("FFFFFFFFFirstName :"+walks[0].FirstName);
+        var walks123 = JSON.stringify(walks);
+        console.log(walks123);
+	</script>
+</body>
+</html>

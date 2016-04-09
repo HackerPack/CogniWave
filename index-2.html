@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<title>Projects</title>
+	<meta charset="utf-8">
+	<meta name = "format-detection" content = "telephone=no" />
+	<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="css/grid.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/touchTouch.css">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+	
+
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery-migrate-1.2.1.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
+<script src = "js/fire_base_constants.js"></script>
+<script src = "js/dbAPI.js"></script>
+<script src="js/login.js"></script>
+<script>
+	checkSession();
+</script>
+	<script src="js/match-walks.js"></script>
+	<script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
+	<script src="js/touchTouch.jquery.js"></script>
+	<script src="js/script.js"></script>
+	<!--[if (gt IE 9)|!(IE)]><!-->
+	<script src="js/wow.js"></script>
+	<script>
+		$(document).ready(function () {
+			if ($('html').hasClass('desktop')) {
+				new WOW().init();
+			}
+		});
+	</script>	
+<style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 50%;
+        width: 100%;
+      }
+	  .controls {
+  		margin-top: 10px;
+  		border: 1px solid transparent;
+  		border-radius: 2px 0 0 2px;
+  		box-sizing: border-box;
+  		-moz-box-sizing: border-box;
+  		height: 32px;
+  		outline: none;
+  		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+	}
+
+#origin-input,
+#destination-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 200px;
+}
+
+#origin-input:focus,
+#destination-input:focus {
+  border-color: #4d90fe;
+}
+
+#mode-selector {
+  color: #fff;
+  background-color: #4d90fe;
+  margin-left: 12px;
+  padding: 5px 11px 0px 11px;
+  visibility="hidden"
+}
+
+#mode-selector label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+  visibility="hidden"
+}
+
+</style>
+	</head>
+<body class="index-2">
+<!--==============================header=================================-->
+<header id="header">
+	<div id="stuck_container">
+		<div class="container">
+			<div class="row">
+				<div class="grid_12">
+					<h1><a href="index.html">WalkPool</a><span>Where and when you wanna walk</span></h1>
+					<nav>
+						<ul class="sf-menu">
+							<li><a href="index.html">Home</a>
+							</li>
+							<li><a href="index-1.html">Share a Walk</a></li>
+							<li class="current"><a href="index-2.html">Plan a Walk</a></li>
+							<li><a href="index-5.html">Notifications</a></li>
+							<li><a href="index-4.html">Contact Us</a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
+<!--=======content================================-->
+    <input id="origin-input" class="controls" type="text"
+        placeholder="Enter an origin location">
+
+    <input id="destination-input" class="controls" type="text"
+        placeholder="Enter a destination location">
+
+    <div id="mode-selector" class="controls">
+      <input type="radio" name="type" id="changemode-walking" checked="checked">
+      <label for="changemode-walking">Walking</label>
+
+      <input type="radio" name="type" id="changemode-transit">
+      <label for="changemode-transit">Transit</label>
+
+      <input type="radio" name="type" id="changemode-driving">
+      <label for="changemode-driving">Driving</label>
+    </div>
+
+    <div id="map"></div>
+  <div id="datetimepicker1" class="input-append date">
+    <input data-format="dd/MM/yyyy hh:mm:ss" type="text" id="datetimepicker2"/>
+    <span class="add-on"> 
+    	<i data-time-icon="icon-time" data-date-icon="icon-calendar" class="glyphicon glyphicon-calendar" ></i>
+    </span>
+  </div>
+
+  
+
+	<input type="radio" name="recurring" value="monthly" /> Monthly 
+	<input type="radio" name="recurring" value="daily" /> Daily
+	<input type="radio" name="recurring" value="weekly" /> None<br>
+
+<input type="submit" class="btn btn-default" value="Submit" onclick="addToDatabase()
+"></input>
+
+<script type="text/javascript">
+  $(function() {
+    $('#datetimepicker1').datetimepicker({
+      language: 'pt-BR'
+    });
+  });
+</script>
+
+<script>
+	$(function(){
+		$('#touch_gallery a').touchTouch();
+	});
+</script>
+<script src="js/lets-walk.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQf4f8pMlnmHj__IkX_fKLcjRL5VtGMTE&signed_in=true&libraries=places&callback=initMap"
+        async defer></script>
+<script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
+<script src = "js/fire_base_constants.js"></script>
+<script src = "js/dbAPI.js"></script>
+<script src="js/login.js"></script>
+<script>
+	checkSession();
+</script>		
+</body>
+</html>
