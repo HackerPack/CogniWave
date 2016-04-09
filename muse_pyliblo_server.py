@@ -6,7 +6,7 @@ import time
 class MuseServer(ServerThread):
     #listen for messages on port 5000
     def __init__(self):
-        ServerThread.__init__(self, 6000)
+        ServerThread.__init__(self, 7000)
 
     #receive accelrometer data
     @make_method('/muse/acc', 'fff')
