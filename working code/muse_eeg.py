@@ -2,6 +2,8 @@ import signal
 import sys
 import time as t
 import numpy as np
+from sparkpost import SparkPost
+import os
 #import smtplib
 import matplotlib.pyplot as plt
 #import smtplib
@@ -10,10 +12,11 @@ import matplotlib.pyplot as plt
 #from email.MIMEBase import MIMEBase
 #from email import encoders
 from liblo import *
-
+user_email = ""
+sp = SparkPost('e138fa5880618351f5be5a072c7a2b4f58cd91ec')
 
 INTERVAL = 100 
-MAX_SD_SUM = -1
+MAX_SD_SUM = 200
 
 
 '''
@@ -48,6 +51,18 @@ def send_email_notif():
     server.sendmail(fromaddr, toaddr, text)
     server.quit()
 '''
+def send_email_notif():
+    response = sp.transmissions.send(
+            recipients=['pkattep@ncsu.edu'],
+            html='<p>Greetings from Cogniwave</p>',
+            from_email='sandbox@sparkpostbox.com',
+            subject='Please find your report attached',
+            attachments=[{
+                "name": "eeg.png",
+                "type": "img/png",
+                "filename": "EEG.png"}]
+            )
+    print response
 
 def signal_handler(signal, frame):
     send_email_notif()
@@ -79,7 +94,6 @@ class MuseServer(ServerThread):
     #listen for messages on port 5000
     def __init__(self):
         ServerThread.__init__(self, 6000)
-        self.blink_count=0
         print "Initialised"
     
     #receive accelrometer data
@@ -99,10 +113,7 @@ class MuseServer(ServerThread):
         EEG[2].append(r_ear)
         EEG[3].append(r_forehead)
         
-        # print "LE = ",np.std(eeg_le)
-        # print "LF = ",np.std(eeg_lf)
-        # print "RE = ",np.std(eeg_re)
-        # print "RF = ",np.std(eeg_rf)
+       
         sd_sum = 0.0
         for i in range(4):
             del EEG[i][0]
@@ -121,40 +132,7 @@ class MuseServer(ServerThread):
             MAX_SD_SUM = sd_sum
             plt.savefig("EEG.png")
         
-    
-    #print "hello123"
-        #print "%s %f %f %f %f" % (path, l_ear, l_forehead, r_forehead, r_ear)
-
-    #handle unexpected messages
-    #@make_method(None, None)
-    #def fallback(self, path, args, types, src):
-    #    print "Unknown message \
-    #    \n\t Source: '%s' \
-    #    \n\t Address: '%s' \
-    #    \n\t Types: '%s ' \
-    #    \n\t Payload: '%s'" \
-    #    % (src.url, path, types, args)
-    
-    #receive blink data
-    @make_method('/muse/elements/blink','i')
-    def blink_callback(self, path, args):
-        print "IT'S A BLINK CALL!!!"
-        #global firebase,user_email
-        blink_val = args
-        if args[0]:
-            print "IT'S A BLINK CALL TRUE!!!"
-            if(self.blink_count==0):
-                self.time = datetime.datetime.now()
-            self.blink_count += 1 
-            if(self.blink_count==4):
-                temp = datetime.datetime.now() - self.time
-                if(temp.seconds<=3):
-                    print "ab jayega" + temp.seconds
-                    data={'email':user_email,'message':'Emergency Message'}
-                    result = firebase.put('/Messages','data', data)
-                    #result = firebase.post('/strings', data={"whatever":"data"}, params={'print': 'pretty'})
-                    #result = firebase.post('/users', user_email,{'message':'This is and alert message.'}, {'print': 'pretty'}, {'X_FANCY_HEADER': 'VERY FANCY'})
-                self.blink_count=0
+   
 
 if len(sys.argv)<2:
     print "<Usage> python muse_pyliblo_server.py <emailId>"
