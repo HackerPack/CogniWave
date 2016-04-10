@@ -53,7 +53,7 @@ def send_email_notif():
 '''
 def send_email_notif():
     response = sp.transmissions.send(
-            recipients=['pkattep@ncsu.edu'],
+            recipients=[user_email],
             html='<p>Greetings from Cogniwave</p>',
             from_email='sandbox@sparkpostbox.com',
             subject='Please find your report attached',
