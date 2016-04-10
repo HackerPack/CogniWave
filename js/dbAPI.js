@@ -141,7 +141,7 @@ function read_user(){
 }
 var messageData = ref.child("Messages/data");
 messageData.on("child_changed", function(snapshot, prevChildey){
-	alert("Val changed");
+	sendSMS();
 });
 
 function get_name_from_uid(uid, callback){
@@ -157,11 +157,16 @@ function saveDetails(data, callback){
   dataRef.update(data, callback);
 }
 
-function sendSMS(number, message){
-    var data = {"number":number, "message":message}
+function sendSMS(){
+	ref.child("Details"+ref.getAuth().uid+"/numberEmergency").once("value", function(data){
+		console.log(data.val());
+
+    var data = {"number":data.val(), "message":"HELP"}
     $.ajax({
         type: "POST",
         url: "http://www.textbelt.com/text",
         data: data
     });
+    });
+    alert("Emergency message sent");
 }
