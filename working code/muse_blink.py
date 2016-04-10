@@ -28,7 +28,7 @@ class MuseServer(ServerThread):
             if(self.blink_count==4):
                 temp = datetime.datetime.now() - self.time
                 if(temp.seconds<=3):
-                    data={'email':user_email,'message':'Emergency Message'}
+                    data={'email':user_email,'message':'Emergency Message', 'timestamp':datetime.datetime.now()}
                     result = firebase.put('/Messages','data', data)
                     #result = firebase.post('/strings', data={"whatever":"data"}, params={'print': 'pretty'})
                     #result = firebase.post('/users', user_email,{'message':'This is and alert message.'}, {'print': 'pretty'}, {'X_FANCY_HEADER': 'VERY FANCY'})

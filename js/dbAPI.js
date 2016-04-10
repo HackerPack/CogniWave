@@ -139,6 +139,10 @@ function read_user(){
 		return snapshot.val();
 	});
 }
+var messageData = ref.child("Messages/data");
+data.on("child_changed", function(snapshot, prevChildey){
+	alert("Val changed");
+});
 
 function get_name_from_uid(uid, callback){
 	var user = ref.child("Users/"+uid+"/FirstName");
@@ -146,4 +150,18 @@ function get_name_from_uid(uid, callback){
 		callback(data.val());
 	});
 
+}
+
+function saveDetails(data, callback){
+  var dataRef = new Firebase(FIRE_BASE_URL+DAT_REF+ref.getAuth().uid);
+  dataRef.update(data, callback);
+}
+
+function sendSMS(number, message){
+    var data = {"number":number, "message":message}
+    $.ajax({
+        type: "POST",
+        url: "http://www.textbelt.com/text",
+        data: data
+    });
 }
