@@ -2,23 +2,24 @@ import signal
 import sys
 import time as t
 import numpy as np
-import smtplib
+#import smtplib
 import matplotlib.pyplot as plt
-import smtplib
+#import smtplib
 import datetime
 from firebase import firebase
-from email.MIMEMultipart import MIMEMultipart
-from email.MIMEText import MIMEText
-from email.MIMEBase import MIMEBase
-from email import encoders
+#from email.MIMEMultipart import MIMEMultipart
+#from email.MIMEText import MIMEText
+#from email.MIMEBase import MIMEBase
+#from email import encoders
 from liblo import *
 
 
 INTERVAL = 100 
 MAX_SD_SUM = -1
 user_email = ""
-firebase = firebase.FirebaseApplication('https://cogniwave.firebaseio.com', None)
+firebase = firebase.FirebaseApplication('https://cogniwave.firebaseio.com')
 
+'''
 def send_email_notif():
     fromaddr = ""
     toaddr = user_email
@@ -49,6 +50,7 @@ def send_email_notif():
     text = msg.as_string()
     server.sendmail(fromaddr, toaddr, text)
     server.quit()
+'''
 
 def signal_handler(signal, frame):
     send_email_notif()
@@ -82,7 +84,7 @@ class MuseServer(ServerThread):
         ServerThread.__init__(self, 6000)
         self.blink_count=0
         print "Initialised"
-
+    
     #receive accelrometer data
     #@make_method('/muse/acc', 'fff')
     #def acc_callback(self, path, args):
@@ -135,30 +137,27 @@ class MuseServer(ServerThread):
     #    \n\t Types: '%s ' \
     #    \n\t Payload: '%s'" \
     #    % (src.url, path, types, args)
-
+    
     #receive blink data
     @make_method('/muse/elements/blink','i')
     def blink_callback(self, path, args):
         print "IT'S A BLINK CALL!!!"
-        db = firebase.FirebaseApplication('https://cogniwave.firebaseio.com/')
-        db.put(1)
         #global firebase,user_email
-        result = firebase.post('/users', user_email, {'print': 'pretty'}, {'X_FANCY_HEADER': 'VERY FANCY'})
-        print result
         blink_val = args
         if args[0]:
             print "IT'S A BLINK CALL TRUE!!!"
-            
             if(self.blink_count==0):
                 self.time = datetime.datetime.now()
-            self.blink_count+=1
-            if(self.blink_count==2):
+            self.blink_count += 1 
+            if(self.blink_count==4):
                 temp = datetime.datetime.now() - self.time
-                if(temp.seconds>=1):
-                    print "ab jayega"
+                if(temp.seconds<=3):
+                    print "ab jayega" + temp.seconds
+                    data={'email':user_email,'message':'Emergency Message'}
+                    result = firebase.put('/Messages','data', data)
                     #result = firebase.post('/strings', data={"whatever":"data"}, params={'print': 'pretty'})
                     #result = firebase.post('/users', user_email,{'message':'This is and alert message.'}, {'print': 'pretty'}, {'X_FANCY_HEADER': 'VERY FANCY'})
-                    self.blink_count=0
+                self.blink_count=0
 
 if len(sys.argv)<2:
     print "<Usage> python muse_pyliblo_server.py <emailId>"
