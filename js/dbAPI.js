@@ -139,8 +139,8 @@ function read_user(){
 		return snapshot.val();
 	});
 }
-var messageData = ref.child("Messages/data");
-data.on("child_changed", function(snapshot, prevChildey){
+var messageData = ref.child("Messages/Data");
+messageData.on("child_changed", function(snapshot, prevChildey){
 	alert("Val changed");
 });
 
