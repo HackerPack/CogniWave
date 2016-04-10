@@ -55,13 +55,13 @@ h5 a:hover {
 =========================================================*/
 #header {
   padding: 20px 0;
-  background: #d94d3a;
+  background: #5cd65c;
 }
 #header h1 {
   float: left;
   padding-left: 40px;
   background: url(../images/logo.png) 0 15px no-repeat;
-  color: #ffffff;
+  color: #fff;
 }
 #header h1 a {
   font: 700 44px/44px 'Open Sans', sans-serif;
@@ -73,6 +73,12 @@ h5 a:hover {
 }
 #header nav {
   float: right;
+}
+h4 a{
+  font-size: 100px;
+}
+.grid_12 > p{
+  font: 100px;
 }
 @media only screen and (max-width: 767px) {
   #header {
@@ -109,6 +115,7 @@ h5 a:hover {
   font-family: 'Marvel', sans-serif;
   margin-bottom: 30px;
   position: relative;
+  -webkit-transition: color 0.65s;
 }
 .sf-menu > li > a:hover {
   color: #ffffff;
@@ -297,7 +304,7 @@ h5 {
   color: #d94d3a;
 }
 p {
-  font: 14px/24px 'Open Sans', sans-serif;
+  font: 20px/24px 'Open Sans', sans-serif;
   color: #727070;
 }
 .full-width-container {

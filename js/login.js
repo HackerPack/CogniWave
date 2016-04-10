@@ -1,4 +1,4 @@
-var ref = new Firebase("https://brilliant-fire-4087.firebaseio.com/");
+var ref = new Firebase("https://cogniwave.firebaseio.com/");
 ref.onAuth(function(authData) {
   if (authData && isNewUser) {
     // save the user's profile into the database so we can list users,

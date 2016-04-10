@@ -1,4 +1,4 @@
-var FIRE_BASE_URL = "https://brilliant-fire-4087.firebaseio.com/";
+var FIRE_BASE_URL = "https://cogniwave.firebaseio.com/";
 var USERS_TABLE = "Users";
-var ref = new Firebase("https://brilliant-fire-4087.firebaseio.com/");
+var ref = new Firebase("https://cogniwave.firebaseio.com/");
 var isNewUser = true;
