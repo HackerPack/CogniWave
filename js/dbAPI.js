@@ -139,7 +139,7 @@ function read_user(){
 		return snapshot.val();
 	});
 }
-var messageData = ref.child("Messages/Data");
+var messageData = ref.child("Messages/data");
 messageData.on("child_changed", function(snapshot, prevChildey){
 	alert("Val changed");
 });
